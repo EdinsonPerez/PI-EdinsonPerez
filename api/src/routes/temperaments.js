@@ -16,7 +16,6 @@ router.post('/', (req, res, next) => {
     const {name} = req.body
     return Temperaments.create({name})
     .then((newTemperament) => {
-        newTemperament
         res.status(201).send(newTemperament)
     })
     .catch(error => next(error))
