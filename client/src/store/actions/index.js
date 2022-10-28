@@ -8,7 +8,7 @@ export function fetchBreeds() {
         .then((breeds) => {
             dispatch({
                 type: FETCH_BREEDS,
-                payload: breeds
+                payload: breeds.data
             })
         })
         .catch((error) => {

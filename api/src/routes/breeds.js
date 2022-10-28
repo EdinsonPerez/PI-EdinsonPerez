@@ -1,13 +1,37 @@
 const { Router } = require('express');
+const { Op } = require('sequelize')
 const axios = require('axios')
 const {Breeds, Temperaments} = require('../db')
 const router = Router();
 
 router.get('/', (req, res, next) => {
-    let breedPromiseApi = axios.get('https://api.thedogapi.com/v1/breeds') // promesa
-    let breedPromiseDb = Breeds.findAll({ //promesa
-        include: Temperaments
-    })
+    //https://api.thedogapi.com/v1/breeds/search?q={raza_perro}
+    let name = req.query.name
+    let breedPromiseApi 
+    let breedPromiseDb 
+
+    if(name){
+        breedPromiseApi = axios.get('https://api.thedogapi.com/v1/breeds/search?q=' + name) // promesa
+        breedPromiseDb = Breeds.findAll({ //promesa
+        include: Temperaments,
+        where: {
+            name: {
+                [Op.iLike]: "%" + name + "%"
+            }
+        },
+        order: [
+            ['name', 'ASC'],
+        ],
+        })
+    }else {
+        breedPromiseApi = axios.get('https://api.thedogapi.com/v1/breeds') // promesa
+        breedPromiseDb = Breeds.findAll({ //promesa
+        include: Temperaments,
+        })
+
+
+    }
+
     Promise.all([
         breedPromiseApi,
         breedPromiseDb
@@ -17,18 +41,41 @@ router.get('/', (req, res, next) => {
             breedApi,//respuesta de la APÏ
              breedDb //respuesta de mi base de datos
             ] = respuesta // mis respuestas
+            
         let filteredBreedsApi = breedApi.data.map((breed)=> {
             return {
                 id: breed.id,
                 name: breed.name,
-                image: breed.image
-
+                image: breed.image,
+                temperament:breed.temperament
             }
         })
+        //ordenar para ponerlos de menor a mayor
         let allBreeds = [...filteredBreedsApi, ...breedDb]
         res.send(allBreeds)
     })
+    .catch(error => next(error))
 })
+
+ router.get('/:id', async (req, res, next) => {
+  try {
+   const id = req.params.id;
+  let breed
+     if(typeof id === 'string' && id.length > 8) {
+    //es de mi Bd
+   breed = await Breeds.findByPk(id)
+    
+  }else{
+    // es de la API
+     response = await axios.get('https://api.thedogapi.com/v1/breeds/' + id)
+     breed = response.data
+    }  
+    return res.status(201).send(breed)
+  } catch(error) {
+    next(error)
+  }
+ })
+
 // router.get('/', (req, res, next) => {
 //     return Breeds.findAll({
 //         include: Temperaments
