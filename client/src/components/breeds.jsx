@@ -7,11 +7,11 @@ export default function Breeds() {
     let dispatch = useDispatch()
     useEffect(() => {
         dispatch(fetchBreeds())
-    }, [])
+    }, [dispatch])
     console.log(breeds)
     return <div>
         {breeds.map((breed) => {
-        return <Breed name={breed.name} image={breed.image}/>
+        return <Breed key={breed.id} name={breed.name} image={breed.image}/>
         })}
     </div>
 
