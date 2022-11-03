@@ -1,13 +1,13 @@
-import  { GET_BREEDS }  from "../actions";
+import  { FETCH_BREEDS }  from "../actions";
 
 const initialState ={
-    breeds: []
-   // filteredBreeds: []
+    breeds: [],
+   filteredBreeds: []
 }
 
- function rootReducer (state = initialState, action) {
+ export default function reducer (state = initialState, action) {
      switch(action.type) {
-        case GET_BREEDS:
+        case FETCH_BREEDS:
             return{
                 ...state,
                 breeds: action.payload
@@ -16,4 +16,3 @@ const initialState ={
                 return state;
     }
 }
-export default rootReducer;

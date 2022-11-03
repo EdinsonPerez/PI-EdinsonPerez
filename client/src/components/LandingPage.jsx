@@ -4,10 +4,10 @@ import {Link} from 'react-router-dom';
 export default function LandingPage() {
 return(
 <div>
-    <h1>Bienvenidos pagina Dogs</h1>
-    <Link to ='/home'>
-        <button>Ingresar</button>
-    </Link>
+   <h1>Bienvenidos pagina Dogs</h1>
+   <Link to ='/home'>
+       <button>Ingresar</button>
+   </Link>
 </div>
 )
 }

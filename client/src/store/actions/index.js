@@ -1,15 +1,14 @@
 import axios from 'axios'
-export const GET_BREEDS = 'GET_BREEDS'
+export const FETCH_BREEDS = 'FETCH_BREEDS'
 
 
 
-export function getBreeds() {
+export function fetchBreeds() {
    return function(dispatch){
-        axios.get("http://localhost:3001/api/breeds/",{
-   })
+        axios.get('http://localhost:3001/api/breeds/')
      .then((breeds) => {
            dispatch({
-               type: GET_BREEDS,
+               type: FETCH_BREEDS,
                payload: breeds.data
           })
       })
