@@ -1,20 +1,22 @@
 import axios from 'axios'
-export const FETCH_BREEDS = 'FETCH_BREEDS'
+export const GET_BREEDS = 'GET_BREEDS'
 
 
-export function fetchBreeds() {
-    return function(dispatch){
-        axios.get('http://localhost:3001/api/breeds/')
-        .then((breeds) => {
-            dispatch({
-                type: FETCH_BREEDS,
-                payload: breeds.data
-            })
+
+export function getBreeds() {
+   return function(dispatch){
+        axios.get("http://localhost:3001/api/breeds/",{
+   })
+     .then((breeds) => {
+           dispatch({
+               type: GET_BREEDS,
+               payload: breeds.data
+          })
+      })
+      .catch((error) => {
+           console.log(error)
         })
-        .catch((error) => {
-            console.log(error)
-        })
-    }
+   }
 }
 
 export function searchBreeds() {
