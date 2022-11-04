@@ -13,6 +13,6 @@ const initialState ={
                 breeds: action.payload
             }
             default:
-                return state;
+                return state
     }
 }
