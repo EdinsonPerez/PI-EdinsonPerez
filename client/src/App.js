@@ -1,6 +1,7 @@
 import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import Breeds from './components/breeds';
+import SearchBar from './components/SearchBar';
 import  LandingPage  from './components/LandingPage';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
  <Switch>
     <Route exact path='/' component={LandingPage}/> 
    <Route path='/home' component={Breeds}/>
+ 
  </Switch>
 </div>
 </BrowserRouter>

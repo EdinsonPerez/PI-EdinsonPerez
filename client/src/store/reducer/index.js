@@ -1,4 +1,4 @@
-import  { FETCH_BREEDS }  from "../actions";
+import  { FETCH_BREEDS, SEARCH_BREEDS }  from "../actions";
 
 const initialState ={
     breeds: [],
@@ -8,6 +8,11 @@ const initialState ={
  export default function reducer (state = initialState, action) {
      switch(action.type) {
         case FETCH_BREEDS:
+            return{
+                ...state,
+                breeds: action.payload
+            }
+        case SEARCH_BREEDS:
             return{
                 ...state,
                 breeds: action.payload
