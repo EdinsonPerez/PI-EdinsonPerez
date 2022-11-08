@@ -5,7 +5,6 @@ const {Breeds, Temperaments} = require('../db')
 const router = Router();
 
 router.get('/', (req, res, next) => {
-    //https://api.thedogapi.com/v1/breeds/search?q={raza_perro}
     let name = req.query.name
     let breedPromiseApi 
     let breedPromiseDb 
@@ -13,7 +12,7 @@ router.get('/', (req, res, next) => {
     if(name){
         breedPromiseApi = axios.get('https://api.thedogapi.com/v1/breeds/search?q=' + name) // promesa
         breedPromiseDb = Breeds.findAll({ //promesa
-        include: Temperaments,
+        include: Temperaments, 
         where: {
             name: {
                 [Op.iLike]: "%" + name + "%"
@@ -21,14 +20,17 @@ router.get('/', (req, res, next) => {
         },
         order: [
             ['name', 'ASC'],
+            
         ],
-        })
+    })
+   
+
+
     }else {
         breedPromiseApi = axios.get('https://api.thedogapi.com/v1/breeds') // promesa
         breedPromiseDb = Breeds.findAll({ //promesa
         include: Temperaments,
         })
-
 
     }
 
@@ -51,7 +53,7 @@ router.get('/', (req, res, next) => {
             }
         })
         //ordenar para ponerlos de menor a mayor
-        let allBreeds = [...filteredBreedsApi, ...breedDb]
+        let allBreeds = [...filteredBreedsApi,...breedDb]
         res.send(allBreeds)
     })
     .catch(error => next(error))

@@ -1,7 +1,7 @@
 import {useState} from 'react'
-import axios from 'axios';
 import { searchBreeds } from '../store/actions';
 import { useDispatch } from 'react-redux';
+
 export default function SearchBar() {
     const[search, setSearch] = useState('')
     

@@ -1,13 +1,18 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { useHistory }  from 'react-router-dom'
 
 export default function LandingPage() {
+    const history = useHistory()
 return(
 <div>
    <h1>Bienvenidos pagina Dogs</h1>
-   <Link to ='/home'>
-       <button>Ingresar</button>
-   </Link>
+   <button onClick={() => history.push('/home')}>
+          Enter
+        </button>
+        <h2>Henry PI APP</h2>
 </div>
 )
 }
+
+
+

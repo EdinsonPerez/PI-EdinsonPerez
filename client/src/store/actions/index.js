@@ -1,6 +1,7 @@
 import axios from 'axios'
 export const FETCH_BREEDS = 'FETCH_BREEDS'
 export const SEARCH_BREEDS = 'SEARCH_BREEDS'
+export const SORT = 'SORT'
 
 
 export function fetchBreeds() {
@@ -20,15 +21,28 @@ export function fetchBreeds() {
 
 export function searchBreeds(search) {
    return function(dispatch){
-      axios.get('http://localhost:3001/api/breeds?name=' + search)
+      axios.get('http://localhost:3001/api/breeds?name=' + search) 
    .then((breeds) => {
          dispatch({
              type: SEARCH_BREEDS,
              payload: breeds.data
         })
+        
     })
     .catch((error) => {
          console.log(error)
       })
  }
 }
+export function sort(order){
+   return {
+      type: SORT,
+      payload: order
+   }
+ }
+//  export function sortweight(order1){
+//    return {
+//       type: SORT_WEIGHT,
+//       payload: order1
+//    }
+//  }
