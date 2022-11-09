@@ -1,5 +1,5 @@
-import { ASCENDENTE } from "../../constantes/sort";
-import  { FETCH_BREEDS, SEARCH_BREEDS, SORT, SORT_WEIGHT }  from "../actions";
+import { ASCENDENTE, HIGHER } from "../../constantes/sort";
+import  { FETCH_BREEDS, SEARCH_BREEDS, SORT, SORT_BYWEIGHT }  from "../actions";
 
 const initialState ={
     breeds: [],
@@ -35,21 +35,33 @@ const initialState ={
                 filteredBreeds: [...orderedBreeds]
 
             }
-            // case SORT_WEIGHT:
-            //     let orderedBreeds1 = [...state.breeds]
-            //     orderedBreeds1 = orderedBreeds1.sort((a, b) => {
-            //         if (a.name.toLowerCase() < b.name.toLowerCase() ) {
-            //         return action.payload === ASCENDENTE ? -1 : 1;
-            //       }
-            //       if (a.name.toLowerCase() > b.name.toLowerCase() ) {
-            //         return action.payload === ASCENDENTE ? 1 : -1;
-            //       }
-            //       return 0;
-            //     })
-            //     return {
-            //         ...state,
-            //         filteredBreeds: [...orderedBreeds1]
-            //     }
+            case SORT_BYWEIGHT:
+             let orderedByWeight = [...state.breeds]
+             orderedByWeight = orderedByWeight.forEach((b) => {
+  if (typeof b.weight === 'string') {
+      let range = b.weight.split('- ')
+      let promedy = (parseInt(range[0]) + parseInt(range[1])) / 2
+      b.weight = promedy
+      console.log(b.weight)
+  }
+                })
+
+                orderedByWeight = orderedByWeight.filter((b) => b.weight !== null)
+                orderedByWeight = orderedByWeight.sort((a, b) => {
+                    if (a.weight < b.weight) {
+                    return action.payload === HIGHER ? -1 : 1;
+                  }
+                  if (a.weight > b.weight ) {
+                    return action.payload === HIGHER ? 1 : -1;
+                  }
+                  return 0;
+                })
+                return {
+                    ...state,
+                    filteredBreeds: [...orderedByWeight]
+              
+                  
+               }
                 default:
                     return state
  

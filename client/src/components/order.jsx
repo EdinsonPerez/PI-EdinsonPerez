@@ -1,6 +1,6 @@
 import { useState, useEffect} from "react"
 import { useDispatch } from "react-redux"
-import { ASCENDENTE, DESCENDENTE } from "../constantes/sort"
+import { ASCENDENTE, DESCENDENTE, HIGHER, LOWER } from "../constantes/sort"
 import { sort } from "../store/actions"
 
 
@@ -26,10 +26,10 @@ export default function Order() {
             <option value="Api">API</option>
         </select>
 
-        <select>
+        <select name="select" onChange={onSelectChange}>
             <option value="weigth">WEIGHT</option>
-            <option value="Higher">High</option>
-            <option value="Lower">Low</option>
+            <option value={HIGHER}>High</option>
+            <option value={LOWER}>Low</option>
         </select>
 
         <select>

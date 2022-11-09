@@ -5,6 +5,7 @@ import Breed from './components/breed';
 import Order from './components/order';
 import SearchBar from './components/SearchBar';
 import  LandingPage  from './components/LandingPage';
+import Paginado from './components/Paginado';
 
 function App() {
   return (
@@ -13,9 +14,10 @@ function App() {
    <LandingPage/>
    </Route>
  <Switch>
-    <Route exact path="/home" component={Breed}>
+    <Route exact path="/home" component={Breeds}>
       <SearchBar/>
       <Order/>
+      
       <Breeds/>
     </Route>
  

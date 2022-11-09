@@ -49,7 +49,8 @@ router.get('/', (req, res, next) => {
                 id: breed.id,
                 name: breed.name,
                 image: breed.image,
-                temperament:breed.temperament
+                temperament:breed.temperament,
+                weight:breed.weight
             }
         })
         //ordenar para ponerlos de menor a mayor
