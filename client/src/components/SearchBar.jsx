@@ -15,6 +15,7 @@ export default function SearchBar() {
         setSearch(e.target.value)
     }
 return <div>
+        <h2>Henry PI APP</h2>
         <form onSubmit={onSubmit}>
             <input type="text" onChange={onInputChange} value={search}/>
             <input type="submit" value="Buscar"/>

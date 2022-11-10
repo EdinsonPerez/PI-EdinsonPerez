@@ -9,7 +9,6 @@ return(
    <button onClick={() => history.push('/home')}>
           Enter
         </button>
-        <h2>Henry PI APP</h2>
 </div>
 )
 }

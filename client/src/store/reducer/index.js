@@ -1,5 +1,5 @@
 import { ASCENDENTE, HIGHER } from "../../constantes/sort";
-import  { FETCH_BREEDS, SEARCH_BREEDS, SORT, SORT_BYWEIGHT }  from "../actions";
+import  { FETCH_BREEDS, SEARCH_BREEDS, SORT, SORT_BY_WEIGHT, FILTER_BY_BREEDS }  from "../actions";
 
 const initialState ={
     breeds: [],
@@ -19,6 +19,15 @@ const initialState ={
                 ...state,
                 filteredBreeds: action.payload
             }
+        case FILTER_BY_BREEDS:
+            const allBreeds = [...state.breeds]
+            const filteredBreeds = action.payload === 'All'? allBreeds : allBreeds.filter(e => e.breed_group === action.payload)
+            
+            return {
+                ...state,
+                filteredBreeds
+            }
+
         case SORT:
             let orderedBreeds = [...state.breeds]
             orderedBreeds = orderedBreeds.sort((a, b) => {
@@ -35,7 +44,7 @@ const initialState ={
                 filteredBreeds: [...orderedBreeds]
 
             }
-            case SORT_BYWEIGHT:
+            case SORT_BY_WEIGHT:
              let orderedByWeight = [...state.breeds]
              orderedByWeight = orderedByWeight.forEach((b) => {
   if (typeof b.weight === 'string') {

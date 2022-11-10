@@ -9,20 +9,18 @@ import Paginado from './components/Paginado';
 
 function App() {
   return (
-   <div className="App">
-   <Route path="/" component={LandingPage}> 
-   <LandingPage/>
-   </Route>
- <Switch>
-    <Route exact path="/home" component={Breeds}>
-      <SearchBar/>
-      <Order/>
-      
-      <Breeds/>
-    </Route>
- 
-  </Switch>
-</div>
+    <div className="App">
+     <Switch>
+          <Route exact path="/home" component={Breeds}>
+             <SearchBar/>
+             <Order/>
+             <Breeds/>
+          </Route>
+          <Route path="/" component={LandingPage}> 
+             <LandingPage/>
+          </Route>
+        </Switch>
+    </div>
   );
 }
 

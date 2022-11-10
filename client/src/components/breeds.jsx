@@ -1,9 +1,10 @@
 import React from 'react';
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import {fetchBreeds} from '../store/actions'
+import {fetchBreeds, filterByBreeds} from '../store/actions'
 import Breed from "./breed"
 import Paginado from './Paginado';
+
 
 
 
@@ -25,6 +26,8 @@ setCurrentPage(pageNumber)
     dispatch(fetchBreeds())
      }, [])
     console.log(breeds)
+
+ 
     
              
     return ( 
@@ -37,7 +40,7 @@ setCurrentPage(pageNumber)
         {currentCharacters?.map((e)=> {
            return  (
            <div>
-           <Breed key={e.id} name={e.name} image={e?.image || e?.url?.image} temperament={e.temperament} />
+           <Breed key={e.id} name={e.name} image={e?.image || e?.url?.image} temperament={e.temperament}  breed_group={e.breed_group}/>
            </div>
            );
         })}
@@ -45,3 +48,4 @@ setCurrentPage(pageNumber)
        
        )
     }
+    

@@ -1,7 +1,8 @@
 import axios from 'axios'
 export const FETCH_BREEDS = 'FETCH_BREEDS'
 export const SEARCH_BREEDS = 'SEARCH_BREEDS'
-export const SORT_BYWEIGHT = 'SORT_BYWEIGHT'
+export const SORT_BY_WEIGHT = 'SORT_BY_WEIGHT'
+export const FILTER_BY_BREEDS = 'FILTER_BY_BREEDS'
 export const SORT = 'SORT'
 
 
@@ -41,9 +42,15 @@ export function sort(order){
       payload: order
    }
  }
-export function sortbyweight(orderweig){
+export function sortByWeight(order){
 return {
-type: SORT_BYWEIGHT,
-payload: orderweig
+type: SORT_BY_WEIGHT,
+payload: order
 }
 }
+export function filterByBreeds(payload){
+   return {
+   type: FILTER_BY_BREEDS,
+   payload
+   }
+   }
