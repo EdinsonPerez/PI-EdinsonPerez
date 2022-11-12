@@ -12,9 +12,9 @@ return(
     <ol className='paginado'>
         { pageNumbers  &&
         pageNumbers.map(number => (
-        <ol className='number' key={number}>
+        <button className='number' key={number}>
         <a onClick={() => paginado(number)}>{number}</a>
-        </ol>
+        </button>
 ))}
 </ol>
     </nav>

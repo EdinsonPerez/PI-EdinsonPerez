@@ -6,6 +6,7 @@ import Order from './components/order';
 import SearchBar from './components/SearchBar';
 import  LandingPage  from './components/LandingPage';
 import Paginado from './components/Paginado';
+import { BreedCreate } from './components/BreedCreate';
 
 function App() {
   return (

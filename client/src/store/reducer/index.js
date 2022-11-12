@@ -1,5 +1,5 @@
 import { ASCENDENTE, HIGHER } from "../../constantes/sort";
-import  { FETCH_BREEDS, SEARCH_BREEDS, SORT, SORT_BY_WEIGHT, FILTER_BY_BREEDS }  from "../actions";
+import  { FETCH_BREEDS, SEARCH_BREEDS, SORT, SORT_BY_WEIGHT, FILTER_BY_BREEDS, FILTER_BY_TEMPERAMENTS, FILTER_CREATE }  from "../actions";
 
 const initialState ={
     breeds: [],
@@ -21,11 +21,28 @@ const initialState ={
             }
         case FILTER_BY_BREEDS:
             const allBreeds = [...state.breeds]
-            const filteredBreeds = action.payload === 'All'? allBreeds : allBreeds.filter(e => e.breed_group === action.payload)
+            
+             const filteredBreeds = action.payload === 'All'? allBreeds : allBreeds.filter(e => e.breed_group === action.payload)
             
             return {
                 ...state,
                 filteredBreeds
+            }
+            case FILTER_CREATE:
+            const allCreate = [...state.breeds]
+            const filteredBreeds1 = action.payload === 'Create'? allCreate.filter(e => e.createdInDb) : allCreate.filter(e => !e.createdInDb) 
+            
+            return {
+                ...state,
+                filteredBreeds: action.payload === 'All' ? state.breeds : filteredBreeds1
+            }
+            case FILTER_BY_TEMPERAMENTS:
+            const allTemperaments = [...state.breeds]
+            const filteredTemperaments = action.payload === 'All'? allTemperaments : allTemperaments.filter(e => e.temperament.split(", ").includes(action.payload))
+            
+            return {
+                ...state,
+                filteredBreeds: filteredTemperaments
             }
 
         case SORT:
@@ -42,16 +59,23 @@ const initialState ={
             return {
                 ...state,
                 filteredBreeds: [...orderedBreeds]
-
             }
+    //  case POST_BREEDS:
+    //     return {
+    //         ...state,
+    // }
+
+
+
+
             case SORT_BY_WEIGHT:
              let orderedByWeight = [...state.breeds]
              orderedByWeight = orderedByWeight.forEach((b) => {
-  if (typeof b.weight === 'string') {
-      let range = b.weight.split('- ')
+  if (typeof b.weight.imperial === 'string') {
+      let range = b.weight.imperial.split('- ')
       let promedy = (parseInt(range[0]) + parseInt(range[1])) / 2
       b.weight = promedy
-      console.log(b.weight)
+      
   }
                 })
 
