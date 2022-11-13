@@ -9,7 +9,7 @@ for (let i = 0; i < Math.ceil(breeds/charactersPerPage); i++){
 }
 return(
 <nav>
-    <ol className='paginado'>
+    <ol className='paginado' >
         { pageNumbers  &&
         pageNumbers.map(number => (
         <button className='number' key={number}>

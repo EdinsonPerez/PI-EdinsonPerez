@@ -29,13 +29,13 @@ setCurrentPage(pageNumber)
 
  
     
-      function handleOnClik(){
+      function handleOnClick(){
          dispatch(fetchBreeds())
       }    
     return ( 
-       <div>
+       <div key={Paginado.id}>
 
-      <button onClick={handleOnClik}>Recargar Breeds</button>
+      <button onClick={handleOnClick}>Recargar Breeds</button>
           <Paginado
           charactersPerPage={charactersPerPage}
           breeds={breeds.length}
@@ -43,8 +43,8 @@ setCurrentPage(pageNumber)
           />
         {currentCharacters?.map((e)=> {
            return  (
-           <div>
-           <Breed key={e.id} name={e.name} image={e?.image || e?.url?.image} temperament={e.temperament}  breed_group={e.breed_group} createdInDb={e.createdInDb} />
+           <div key={e.id}>
+           <Breed key={e.id} name={e.name} image={e?.image || e?.url?.image} temperament={e.temperament}  breed_group={e.breed_group} weight={e?.weight || e?.imperial?.weight} createdInDb={e.createdInDb} />
            </div>
            );
         })}

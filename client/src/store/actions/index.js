@@ -5,6 +5,7 @@ export const SORT_BY_WEIGHT = 'SORT_BY_WEIGHT'
 export const FILTER_BY_BREEDS = 'FILTER_BY_BREEDS'
 export const FILTER_BY_TEMPERAMENTS = 'FILTER_BY_TEMPERAMENTS'
 export const FILTER_CREATE = 'FILTER_CREATE'
+export const FILTER_BY_WEIGHT_MIN = 'FILTER_BY_WEIGHT_MIN'
 export const SORT = 'SORT'
 
 
@@ -38,6 +39,12 @@ export function searchBreeds(search) {
       })
  }
 }
+
+
+
+
+
+
 export function sort(order){
    return {
       type: SORT,
@@ -56,6 +63,15 @@ export function filterByBreeds(payload){
    payload
    }
    }
+
+   export function filterByWeightMin(payload){
+      return {
+      type: FILTER_BY_WEIGHT_MIN,
+      payload
+      }
+      }
+
+
    export function filterByTemperaments(payload){
       return {
       type: FILTER_BY_TEMPERAMENTS,

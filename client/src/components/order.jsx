@@ -1,7 +1,7 @@
 import { useState, useEffect} from "react"
 import { useDispatch } from "react-redux"
 import { ASCENDENTE, DESCENDENTE, HIGHER, LOWER } from "../constantes/sort"
-import { sort, filterByBreeds, filterByTemperaments, filterCreate } from "../store/actions"
+import { sort, filterByBreeds, filterByTemperaments, filterCreate, filterByWeightMin } from "../store/actions"
 
 
 
@@ -17,11 +17,16 @@ export default function Order() {
     function onSelectChangeWeigth(e) {
         setOrder(e.target.value)
 }
-
-        function handleFilterBreeds(e){
+      function handleFilterBreeds(e){
         dispatch(filterByBreeds(e.target.value))
         console.log(e.target.value)
       }
+
+      function handleFilterWeightMin(e){
+        dispatch(filterByWeightMin(e.target.value))
+        console.log(e.target.value)
+      }
+
 
       function handleFilterTemperaments(e){
         dispatch(filterByTemperaments(e.target.value))
@@ -34,24 +39,49 @@ export default function Order() {
         
     return<div>
     <select name="select" onChange={onSelectChange}>
-    <option value="AlphabeticalOrder">ALPHABETICAL</option>
+    <option value="AlphabeticalOrder">Order by Alphabetical</option>
     <option value={ASCENDENTE}> A   -     Z</option>
     <option value={DESCENDENTE}> Z   -    A</option>
     </select>
-    <select onChange={e => handleFilterCreate(e)}>
-            <option value="All">ALL BREEDS CREATE</option>
-            <option value="Create">CREATE</option>
-            <option value="Api">API</option>
-        </select>
 
         <select name="select" onChange={onSelectChangeWeigth}>
-            <option value="weigth">WEIGHT</option>
+            <option value="weigth">Order by Weight</option>
             <option value={HIGHER}>High</option>
             <option value={LOWER}>Low</option>
         </select>
 
+    <select onChange={e => handleFilterCreate(e)}>
+            <option value="All">Filter by Breeds Existing</option>
+            <option value="Create">CREATE</option>
+            <option value="Api">API</option>
+        </select>
+
+
         <select onChange={e => handleFilterBreeds(e)}>
-            <option value="All">ALL BREEDS</option>
+            <option value="All">Filter by All Breeds</option>
+            <option value="Herding">HERDING</option>
+             <option value="Hound">HOUND</option>
+             <option value="Mixed">MIXED</option>
+            <option value="Non-Sporting">NON-SPORTING</option>
+            <option value="Sporting">SPORTING</option>
+            <option value="Terrier">TERRIER</option>
+             <option value="Toy">TOY</option>
+            <option value="Working">WORKING</option>
+        </select>
+        <select onChange={e => handleFilterWeightMin(e)}>
+            <option value="All">Filter by Weight MIN</option>
+            <option value="50 - 60">Breed with Weight 3"</option>
+             <option value="Hound">HOUND</option>
+             <option value="Mixed">MIXED</option>
+            <option value="Non-Sporting">NON-SPORTING</option>
+            <option value="Sporting">SPORTING</option>
+            <option value="Terrier">TERRIER</option>
+             <option value="Toy">TOY</option>
+            <option value="Working">WORKING</option>
+        </select>
+
+        <select>
+            <option value="All">Filter by Weight MAX</option>
             <option value="Herding">HERDING</option>
              <option value="Hound">HOUND</option>
              <option value="Mixed">MIXED</option>
@@ -62,8 +92,9 @@ export default function Order() {
             <option value="Working">WORKING</option>
         </select>
 
-        <select onChange={e => handleFilterTemperaments(e)}>
-            <option value="All">ALL TEMPERAMENTS</option>
+
+        <select>
+            <option value="All">Filter by Temperaments</option>
             <option value="Active">ACTIVE</option>
              <option value="Adaptable">ADAPTABLE</option>
             <option value="Adventurous">ADVENTUROUS</option>

@@ -1,25 +1,29 @@
-import {useState} from 'react'
+import React from 'react';
+import {useState} from 'react';
 import { searchBreeds } from '../store/actions';
 import { useDispatch } from 'react-redux';
 
 export default function SearchBar() {
-    const[search, setSearch] = useState('')
-    
     let dispatch = useDispatch()
+    const[search, setSearch] = useState("")
+    
+    function onInputChange(e) {
+        e.preventDefault()
+        setSearch(e.target.value)
+        
+    }
     function onSubmit(e) {
         e.preventDefault();
         dispatch(searchBreeds(search))
     }
-    function onInputChange(e) {
-        e.preventDefault()
-        setSearch(e.target.value)
-    }
+    
 return <div>
         <h2>Henry PI APP</h2>
-        <form onSubmit={onSubmit}>
-            <input type="text" onChange={onInputChange} value={search}/>
-            <input type="submit" value="Buscar"/>
-        </form>
+        <input
+        type = 'text'
+        placeholder = "Buscar..."
+        onChange = {(e) => onInputChange(e)}/>
+            <button type='submit' onClick={(e) => onSubmit(e)}>Buscar</button>
 </div>
 }
 
