@@ -6,6 +6,8 @@ export const FILTER_BY_BREEDS = 'FILTER_BY_BREEDS'
 export const FILTER_BY_TEMPERAMENTS = 'FILTER_BY_TEMPERAMENTS'
 export const FILTER_CREATE = 'FILTER_CREATE'
 export const FILTER_BY_WEIGHT_MIN = 'FILTER_BY_WEIGHT_MIN'
+export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS'
+export const POST_BREEDS = 'POST_BREEDS'
 export const SORT = 'SORT'
 
 
@@ -41,7 +43,22 @@ export function searchBreeds(search) {
 }
 
 
+export function getTemperaments(){
+   return async function(dispatch){
+      var json = await axios.get("http://localhost:3001/api/temperaments",{
 
+      });
+      return dispatch({type: "GET_TEMPERAMENTS", payload:json.data});
+   };
+}
+
+export function postBreed(payload) {
+   return async function (dispatch){
+const response = await axios.post("http://localhost:3001/api/breeds",payload)
+console.log(response)
+return response;
+   }
+}
 
 
 

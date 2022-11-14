@@ -5,12 +5,15 @@ import Breed from './components/breed';
 import Order from './components/order';
 import SearchBar from './components/SearchBar';
 import  LandingPage  from './components/LandingPage';
-import { BreedCreate } from './components/BreedCreate';
+import BreedCreate  from './components/BreedCreate';
 
 function App() {
   return (
     <div className="App" >
      <Switch>
+          <Route path="/breed" component={BreedCreate}> 
+             <BreedCreate/>
+          </Route>
           <Route exact path="/home" component={Breeds}>
              <SearchBar/>
              <Order/>
