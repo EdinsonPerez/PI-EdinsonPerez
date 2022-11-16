@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import {fetchBreeds, filterByBreeds} from '../store/actions'
+import {Link} from 'react-router-dom';
 import Breed from "./breed"
 import Paginado from './Paginado';
 
@@ -36,6 +37,7 @@ setCurrentPage(pageNumber)
        <div key={Paginado.id}>
 
       <button onClick={handleOnClick}>Recargar Breeds</button>
+      <Link to= '/breeds'><button>Ir a Formulario para crear Breed</button></Link>
           <Paginado
           charactersPerPage={charactersPerPage}
           breeds={breeds.length}

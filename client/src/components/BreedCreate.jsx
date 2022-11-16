@@ -5,10 +5,25 @@ import { postBreed, getTemperaments } from '../store/actions';
 
 
 
+
+// function validate(input) {
+//     let errors ={};
+//     if (!input.name) {
+//         errors.name = 'Se requiere una Breed';
+//      } else if (!input.height_min) {
+//         errors.height_min = 'Altura debe ser completada'
+//      }
+//      return errors;
+// };
+
+
+
+
 export default function BreedCreate(){
     const dispatch = useDispatch()
     const history = useHistory()
     const temperaments = useSelector((state)=> state.temperaments)
+    const [errors, setErrors] = useState({});
 
     const [input, setInput] = useState({
         name:"",
@@ -17,8 +32,7 @@ export default function BreedCreate(){
         weight_min:"",
         weight_max:"",
         life_span:"",
-        image:"",
-        temperaments:[]
+        temperament:[]
      })
 
 function handleChange(e){
@@ -26,15 +40,30 @@ function handleChange(e){
             ...input,
             [e.target.name] : e.target.value
         })
+//         setErrors(validate({
+//             ...input,
+//             [e.target.name] : e.target.value
+//         }));
+        console.log(input)
 }
 
 function handleSelect(e){
     setInput({
        ...input,
-       temperaments: [...input.temperaments,e.target.value]
+       temperament: [...input.temperament,e.target.value]
 
     })
 }
+// function handleDelete(e){
+//     setInput({
+//        ...input,
+//        temperaments: input.temperament.filter(temp => temp !== e)
+
+//     })
+// }
+
+
+
 function handleSubmit(e){
     e.preventDefault();
     console.log(input)
@@ -47,8 +76,7 @@ function handleSubmit(e){
         weight_min:"",
         weight_max:"",
         life_span:"",
-        image:"",
-        temperaments:[]
+        temperament:[]
 
     })
     history.push('/home')
@@ -73,22 +101,28 @@ return(
                 name= "name"
                 onChange={(e)=> handleChange(e)}
                 />
+                {/* {errors.name && (
+                    <p className='error'>{errors.name}</p>
+                )} */}
             </div>
             <div>
-                <label>Hight_Min:</label>
+                <label>Height_Min:</label>
                 <input 
                 type="text" 
-                value= {input.hight_min}
-                name= "hight_min"
+                value= {input.height_min}
+                name= "height_min"
                 onChange={(e)=> handleChange(e)}
                 />
+                {/* {errors.height_min && (
+                    <p className='error'>{errors.height_min}</p>
+                    )} */}
             </div>
             <div>
-                <label>Hight_Max:</label>
+                <label>Height_Max:</label>
                 <input 
                 type="text" 
-                value= {input.hight_max}
-                name="hight_max"
+                value= {input.height_max}
+                name="height_max"
                 onChange={(e)=> handleChange(e)}
                 />
             </div>
@@ -119,7 +153,7 @@ return(
                 onChange={(e)=> handleChange(e)}
                 />
             </div>
-            <div>
+            {/* <div>
                 <label>Imagen:</label>
                 <input 
                 type="text" 
@@ -127,27 +161,23 @@ return(
                 name="image"
                 onChange={(e)=> handleChange(e)}
                 />
-            </div>
-                <select onChange={handleSelect}>
+            </div> */}
+                <select onChange={(e)=> handleSelect(e)}>
                     {temperaments.map((temp)=> (
                     <option value={temp.name}>{temp.name}</option>
                     ))}
                 </select>
-                <ul><li>{input.temperaments.map(e => e + " ,")}</li></ul>
+                <ul><li>{input.temperament.map(e => e + " ,")}</li></ul>
                 <button type='submit'>Crear Breed</button>
-
-
-
-
-
-
         </form>
-
-
-
-
+        {/* {input.temperament.map(el =>
+            <div className='divTemp'> 
+            <p>{el}</p>
+            <button className="botonX" onClick={()=> handleDelete(el)}>x</button>
+            </div> */}
+                    
+    {/* )} */}
 </div>
 )
-
 
 }

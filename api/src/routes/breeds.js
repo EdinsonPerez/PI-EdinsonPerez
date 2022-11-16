@@ -50,7 +50,11 @@ router.get('/', (req, res, next) => {
                 name: breed.name,
                 image: breed.image,
                 temperament:breed.temperament,
-                weight:breed.weight,
+                weight_min:breed.weight_min,
+                weight_max:breed.weight_max,
+                height_min:breed.weight_min,
+                height_max:breed.weight_max,
+                life_span:breed.life_span,
                 breed_group:breed.breed_group
             }
         })
@@ -93,15 +97,22 @@ router.get('/', (req, res, next) => {
 // })
 router.post('/', async (req, res, next) => {
     try {
-        const {name, image} = req.body;
+        const {name, height_min, height_max,  weight_min, weight_max, life_span, temperament } = req.body;
         const newBreed = await Breeds.create({
             name,
-            image
+            height_min,
+            height_max,
+            weight_min,
+            weight_max,
+            life_span,
+            image: 'https://www.bing.com/th?id=OIP.0AxGzZKxi7KA3j_NKO7QdwHaEo&w=170&h=106&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
         })
-        res.status(201).send(newBreed)
+        .then((breed) => breed.setTemperaments(temperament))
+        .then(res.send({ message: 'Created.!' }))
     } catch(error){
         next(error)
-    }
+        }
+       
 })
  
 router.post('/:breedId/temperament/:temperamentId', async (req, res, next) => {

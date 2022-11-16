@@ -8,6 +8,7 @@ export const FILTER_CREATE = 'FILTER_CREATE'
 export const FILTER_BY_WEIGHT_MIN = 'FILTER_BY_WEIGHT_MIN'
 export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS'
 export const POST_BREEDS = 'POST_BREEDS'
+export const GET_DETAIL = 'GET_DETAIL'
 export const SORT = 'SORT'
 
 
@@ -101,3 +102,16 @@ export function filterByBreeds(payload){
          payload
          }
          }
+      export function getDetail(id){
+         return async function(dispatch){
+         try{
+            var json= await axios.get("http://localhost:3001/api/breeds/" + id);
+            return dispatch({
+               type: GET_DETAIL,
+               payload: json.data
+            })
+         }catch(error){
+            console.log(error)
+         }
+      }
+   }

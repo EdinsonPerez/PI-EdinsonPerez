@@ -1,10 +1,11 @@
 import { ASCENDENTE, HIGHER } from "../../constantes/sort";
-import  { FETCH_BREEDS, SEARCH_BREEDS, SORT, SORT_BY_WEIGHT, FILTER_BY_BREEDS, FILTER_BY_TEMPERAMENTS, FILTER_CREATE, FILTER_BY_WEIGHT_MIN, POST_BREEDS, GET_TEMPERAMENTS  }  from "../actions";
+import  { FETCH_BREEDS, SEARCH_BREEDS, SORT, SORT_BY_WEIGHT, FILTER_BY_BREEDS, FILTER_BY_TEMPERAMENTS, FILTER_CREATE, FILTER_BY_WEIGHT_MIN, POST_BREEDS, GET_TEMPERAMENTS, GET_DETAIL  }  from "../actions";
 
 const initialState ={
     breeds: [],
    filteredBreeds: [],
-   temperaments: []
+   temperaments: [],
+   detail:[]
 }
 
  export default function reducer (state = initialState, action) {
@@ -80,7 +81,12 @@ const initialState ={
             temperaments: action.payload
         }
 
-
+        case  GET_DETAIL:
+            return {
+                ...state,
+                detail: action.payload
+            }
+            
 
             case SORT_BY_WEIGHT:
              let orderedByWeight = [...state.breeds]
